@@ -1,0 +1,14 @@
+@import './colors';
+
+@mixin bg-element($right: inherit, $left: inherit, $bottom: inherit, $top: inherit) {
+   content: '';
+   position: absolute;
+   right: $right;
+   left: $left;
+   bottom: $bottom;
+   top: $top;
+   width: 6px;
+   height: 6px;
+   background: $white;
+   z-index: 2;
+}

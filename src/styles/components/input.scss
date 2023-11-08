@@ -1,0 +1,43 @@
+@import '../colors';
+@import '../bg-element';
+
+.main-input {
+   position: relative;
+   width: 100%;
+   &::after {
+      @include bg-element($left: 0, $top: 0)
+   }
+   &::before {
+      @include bg-element($right: 0, $top: 0)
+   }
+   input {
+      font-size: 16px;
+      color: $input-text-color;
+   
+      padding: 12px 29px;
+      border: 6px solid $primary-color;
+      background: rgba(255, 255, 255, 0.80);
+      width: 100%;
+      &::placeholder {
+         color: $input-placeholder-color;
+      }
+   }
+   &--password {
+      input {
+         padding-right: 52px;
+      }
+   }
+   button {
+      position: absolute;
+      right: 29px;
+      top: 18px;
+   }
+   &__inner {
+      &::after {
+         @include bg-element($left: 0, $bottom: 0)
+      }
+      &::before {
+         @include bg-element($right: 0, $bottom: 0)
+      }
+   }
+}

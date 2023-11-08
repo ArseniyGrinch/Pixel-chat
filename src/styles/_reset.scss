@@ -10,8 +10,6 @@
 	box-sizing: border-box;
 }
 
-/* Links */
-
 a, a:link, a:visited  {
    text-decoration: none;
 }
@@ -20,23 +18,9 @@ a:hover  {
    text-decoration: none;
 }
 
-/* Common */
-
-aside, nav, footer, header, section, main {
-	display: block;
-}
-
 h1, h2, h3, h4, h5, h6, p {
    font-size: inherit;
 	font-weight: inherit;
-}
-
-ul, ul li {
-	list-style: none;
-}
-
-img {
-	vertical-align: top;
 }
 
 img, svg {
@@ -53,11 +37,15 @@ input, textarea, button, select {
    background-color: transparent;
 }
 
+textarea {
+	resize: none;
+}
+
 input::-ms-clear {
 	display: none;
 }
 
-button, input[type="submit"] {
+button {
    display: inline-block;
    box-shadow: none;
    background-color: transparent;
@@ -77,4 +65,8 @@ button::-moz-focus-inner {
 
 label {
 	cursor: pointer;
+}
+
+button:hover, a:hover {
+	transition: .2s;
 }

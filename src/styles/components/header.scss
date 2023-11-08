@@ -1,0 +1,12 @@
+@import '../colors';
+
+.header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   
+   background: $white;
+
+   padding: 29px 43px;
+   border-bottom: 6px solid $secondary-color;
+}

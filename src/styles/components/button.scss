@@ -1,0 +1,25 @@
+@import '../colors';
+
+.main-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   padding: 23px;
+   border-right: 6px solid $primary-color;
+   border-bottom: 6px solid $primary-color;
+
+   position: relative;
+   background: $btn-background-color;
+   width: 100%;
+   transition: .2s;
+   span {
+      font-size: 16px;
+      color: $white;
+
+      margin-left: 12px;
+   }
+   &:hover {
+      background: $primary-color;
+   }
+}

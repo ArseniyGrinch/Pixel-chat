@@ -1,0 +1,68 @@
+@import '../colors';
+   
+.message {
+   display: flex;
+   margin-bottom: 24px;
+   &:last-child {
+      margin-bottom: 0;
+   }
+   &__info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 35px;
+   }
+   &__avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: $background-avatar-color;
+      width: 89px;
+      min-width: 89px;
+      height: 85px;
+      padding-left: 4px;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+      &::after {
+         content: '';
+         position: absolute;
+         left: 0;
+         top: 0;
+         width: 4px;
+         height: calc(100% - 4px);
+         background: #90839E;
+      }
+      &::before {
+         content: '';
+         position: absolute;
+         left: 4px;
+         bottom: 0;
+         width: calc(100% - 4px);
+         height: 4px;
+         background: #90839E;
+      }
+      img {
+         width: 85px;
+         height: 85px;
+         object-fit: cover;
+      }
+      &--default {
+         img {
+            width: 61px;
+            height: 61px;
+         }
+      }
+   }
+   &__name {
+      font-size: 10px;
+      line-height: 16px;
+      color: #fff;
+      text-align: center;
+   }
+   .nes-balloon {
+      margin: 0;
+      margin-bottom: 28px;
+      white-space: break-spaces;
+   }
+}
