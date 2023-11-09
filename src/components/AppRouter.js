@@ -1,8 +1,11 @@
 import React, { useContext } from "react"
 import { Route, Routes, Navigate } from 'react-router-dom';
+// data
 import { Context } from '../index';
+// routes
 import { privateRoutes, publicRoutes } from "../routes";
 import { CHAT_ROUTE, LOGIN_ROUTE } from "../utils/consts";
+// firebase
 import { useAuthState } from 'react-firebase-hooks/auth'
 
 const AppRouter = () => {
