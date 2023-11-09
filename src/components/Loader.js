@@ -1,3 +1,4 @@
+// css
 import '../styles/components/loader.scss';
 
 const Loader = () => {

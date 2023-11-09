@@ -1,4 +1,6 @@
+// icons
 import logo from '../../src/images/logo.svg';
+// css
 import '../styles/components/logo.scss';
 
 const Logo = (props) => {
