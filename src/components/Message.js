@@ -12,9 +12,7 @@ function Message(props) {
         </div>
         <div className='message__name'>{props.message.displayName}</div>
       </div>
-      <div className='nes-balloon from-left'>
-        <p>{props.message.text}</p>
-      </div>
+      <div className='nes-balloon from-left'>{props.message.text}</div>
     </div>
   );
 }

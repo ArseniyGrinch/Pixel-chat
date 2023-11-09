@@ -16,3 +16,9 @@
    background-size: cover;
    background-repeat: no-repeat;
 }
+
+@media (max-width: 768px)  {
+   .chat-container {
+      padding: 24px 16px;
+   }
+}

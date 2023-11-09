@@ -11,3 +11,12 @@
       margin-bottom: 0;
    }
 }
+
+@media (max-width: 768px) {
+   .logo {
+      h1 {
+         font-size: 26px;
+         margin-left: 24px;
+      }  
+   }
+}

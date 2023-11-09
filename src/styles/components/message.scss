@@ -10,6 +10,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 89px;
+      min-width: 89px;
       margin-right: 35px;
    }
    &__avatar {
@@ -59,10 +61,47 @@
       line-height: 16px;
       color: #fff;
       text-align: center;
+      word-break: break-word;
    }
    .nes-balloon {
+      padding: 16px 24px;
       margin: 0;
       margin-bottom: 28px;
       white-space: break-spaces;
+      word-break: break-word;
+   }
+}
+
+@media (max-width: 768px) {
+   .message {
+      &__info {
+         width: 51px;
+         min-width: 51px;
+         margin-right: 24px;
+      }
+      &__avatar {
+         width: 51px;
+         min-width: 51px;
+         height: 51px;
+         padding-left: 3px;
+         padding-bottom: 3px;
+         &::after {
+            width: 3px;
+            height: calc(100% - 3px);
+         }
+         &::before {
+            width: calc(100% - 3px);
+            height: 3px;
+            left: 3px;
+         }
+         img {
+            width: 48px;
+            height: 48px;
+         }
+      }
+      .nes-balloon {
+         padding: 12px 13px;
+         margin-bottom: 16px;
+      }
    }
 }
