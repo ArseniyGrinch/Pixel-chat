@@ -1,7 +1,10 @@
 import { createContext } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
+// css
 import './styles/main.scss';
+// components
 import App from './App';
+// firebase
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -23,13 +26,12 @@ export const Context = createContext(null)
 const auth = firebase.auth()
 const firestore = firebase.firestore()
 
-ReactDOM.render(
+createRoot(document.getElementById('root')).render(
   <Context.Provider value={{
     firebase,
     auth,
     firestore
   }}>
     <App />
-  </Context.Provider>,
-  document.getElementById('root')
-)
+  </Context.Provider>
+);
