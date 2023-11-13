@@ -8,8 +8,7 @@
 
    width: 100%;
    height: 100%;
-   max-width: calc(794px + 32px);
-   padding: 0 16px;
+   max-width: 794px;
    margin: 0 auto;
    &__container {
       width: 100%;
@@ -95,6 +94,34 @@
       }
       &--margin-top {
          margin-top: 30px;
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   .login {
+      .logo img {
+         display: none;
+      }
+      &__container {
+         border: none;
+         backdrop-filter: none;
+         background: none;
+         &::after {
+            content: none;
+         }
+         &::before {
+            content: none;
+         }
+      }
+      &__inner {
+         padding: 24px 0;
+         &::after {
+            content: none;
+         }
+         &::before {
+            content: none;
+         }
       }
    }
 }

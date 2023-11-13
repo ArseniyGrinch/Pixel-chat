@@ -16,10 +16,21 @@
    span {
       font-size: 16px;
       color: $white;
-
-      margin-left: 12px;
+   }
+   &--span-ml {
+      span {
+         margin-left: 12px;
+      }
    }
    &:hover {
       background: $primary-color;
+   }
+}
+
+@media (max-width: 768px) {
+   .main-btn {
+      span {
+         font-size: 14px;
+      }
    }
 }
