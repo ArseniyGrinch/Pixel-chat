@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../index';
 // firebase
 import firebase from 'firebase/compat/app';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 // components
 import Logo from './Logo';
 import Button from './Button';
@@ -40,11 +40,13 @@ const Login = () => {
       const authData = getAuth()
 
       createUserWithEmailAndPassword(authData, regEmail, regPassword)
-      .then((e) => {
-
-      })
+      .then((userCredential) => {
+         updateProfile(userCredential.user, {
+            displayName: regName
+         })
+       })
       .catch(e => {
-
+ 
       })
    }
   
