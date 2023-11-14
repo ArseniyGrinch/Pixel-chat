@@ -26,28 +26,43 @@ const Login = () => {
    const [regName, setRegName] = useState('')
    const [regEmail, setRegEmail] = useState('')
    const [regPassword, setRegPassword] = useState('')
+   // reg validation
+   const [hideRegNameError, setRegNameError] = useState(true)
+   const [hideRegEmailError, setRegEmailError] = useState(true)
+   const [hideRegPasswordError, setRegPasswordError] = useState(true)
+   const [hideGlobalRegError, setGlobalRegError] = useState(true)
+   // email validation RegExp
+   const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu
    // account data to send
    const [accountEmail, setAccountEmail] = useState('')
    const [accountPassword, setAccountPassword] = useState('')
 
    const loginWithGoogle = async () => {
       const provider = new firebase.auth.GoogleAuthProvider()
-      console.log(provider, 'provider')
       const {user} = await auth.signInWithPopup(provider)
    }
 
    const registration = () => {
-      const authData = getAuth()
+      if (!regName) {
+         setRegNameError(false)
+      } else if (!EMAIL_REGEXP.test(regEmail)) {
+         setRegEmailError(false)
+      } else if (regPassword.length < 6) {
+         setRegPasswordError(false)
+      } else {
+         const authData = getAuth()
 
-      createUserWithEmailAndPassword(authData, regEmail, regPassword)
-      .then((userCredential) => {
-         updateProfile(userCredential.user, {
-            displayName: regName
+         createUserWithEmailAndPassword(authData, regEmail, regPassword)
+         .then((userCredential) => {
+            updateProfile(userCredential.user, {
+               displayName: regName
+            })
+            setGlobalRegError(true)
+          })
+         .catch(e => {
+            setGlobalRegError(false)
          })
-       })
-      .catch(e => {
- 
-      })
+      }
    }
   
    const loginWithEmailAndPassowrd = () => {
@@ -71,11 +86,24 @@ const Login = () => {
                      <div className='login__form'>
                         <h2>Регистрация</h2>
                         <div className="login__inputs">
-                           <Input placeholder='Ник' type='text' value={regName} onChange={e => setRegName(e.target.value)} />
-                           <Input placeholder='Email' type='text' value={regEmail} onChange={e => setRegEmail(e.target.value)} />
-                           <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={regPassword} onChange={e => setRegPassword(e.target.value)} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+                           <Input placeholder='Ник' type='text' value={regName} onChange={e => {
+                              setRegNameError(e.target.value)
+                              setRegName(e.target.value)
+                           }} />
+                           <div className='login__error' hidden={hideRegNameError}>Поле не может быть пустым</div>
+                           <Input placeholder='Email' type='text' value={regEmail} onChange={e => {
+                              setRegEmailError(EMAIL_REGEXP.test(e.target.value))
+                              setRegEmail(e.target.value)
+                           }} />
+                           <div className='login__error' hidden={hideRegEmailError}>Проверьте правильность введенных данных</div>
+                           <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={regPassword} onChange={e => {
+                              setRegPasswordError(e.target.value.length > 5)
+                              setRegPassword(e.target.value)
+                           }} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+                           <div className='login__error' hidden={hideRegPasswordError}>Минимум 6 символов</div>
                         </div>
                         <Button onClick={registration} text='Зарегистрироваться' />
+                        <div className='login__error login__error--mt' hidden={hideGlobalRegError}>Ошибка. Проверьте данные и повторите попытку</div>
                         <div className='login__account login__account--border-bottom'>
                            <button onClick={() => setScreen('account')}>
                               <span>У меня есть аккаунт</span>   
