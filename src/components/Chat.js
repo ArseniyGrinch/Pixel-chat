@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 // data
 import { Context } from '../index';
 // firebase
@@ -18,8 +18,13 @@ import exitArrowIcon from '../../src/images/exit-arrow.svg';
 
 const Chat = () => {
   const {auth, firestore} = useContext(Context)
+  // data to send
   const [user] = useAuthState(auth)
   const [value, setValue] = useState('')
+  // scroll data
+  const scrollRef = useRef(null)
+  const [firstScroll, setFirstScroll] = useState(false)
+  // data
   const [chatUsers] = useCollectionData(
     firestore.collection('users')
   )
@@ -36,13 +41,22 @@ const Chat = () => {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     }
     firestore.collection('messages').add(dataToSend)
-
+    .then(() => {
+      /* scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' }) */
+    })
     firestore.collection('users').doc(`user-${user.uid}`).get().then((doc) => {
       if (!doc.exists) firestore.collection('users').doc(`user-${user.uid}`).set(dataToSend);
     })
 
     setValue('')
   }
+
+  useEffect(() => {
+    if (!loading && !firstScroll) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      setFirstScroll(true)
+    }
+  });
 
   const signOut = () => {
     auth.signOut()
@@ -60,7 +74,7 @@ const Chat = () => {
             <div className="chat__messages">
               <div className="chat__messages-inner">
                 {messages.length ? (
-                  <div className="chat__messages-container">
+                  <div className="chat__messages-container" ref={scrollRef}>
                     {messages.map((message, index) => {
                       return <Message key={`message-${index}`} message={message} user={user} />
                     })}
