@@ -36,6 +36,10 @@ const Login = () => {
    // account data to send
    const [accountEmail, setAccountEmail] = useState('')
    const [accountPassword, setAccountPassword] = useState('')
+   // login validation
+   const [hideLoginEmailError, setLoginEmailError] = useState(true)
+   const [hideLoginPasswordError, setLoginPasswordError] = useState(true)
+   const [hideGlobalLoginError, setGlobalLoginError] = useState(true)
 
    const loginWithGoogle = async () => {
       const provider = new firebase.auth.GoogleAuthProvider()
@@ -59,21 +63,27 @@ const Login = () => {
             })
             setGlobalRegError(true)
           })
-         .catch(e => {
+         .catch(() => {
             setGlobalRegError(false)
          })
       }
    }
   
    const loginWithEmailAndPassowrd = () => {
-      const authData = getAuth()
-      signInWithEmailAndPassword(auth, accountEmail, accountPassword)
-      .then(e => {
-         console.log(e, 'e')
-      })
-      .catch(e => {
-         console.log(e, 'e')
-      })
+      if (!EMAIL_REGEXP.test(accountEmail)) {
+         setLoginEmailError(false)
+      } else if (accountPassword.length < 6) {
+         setLoginPasswordError(false)
+      } else {
+         const authData = getAuth()
+         signInWithEmailAndPassword(auth, accountEmail, accountPassword)
+         .then(() => {
+            setGlobalLoginError(true)
+         })
+         .catch(() => {
+            setGlobalLoginError(false)
+         })
+      }
    }
 
    return (
@@ -92,7 +102,7 @@ const Login = () => {
                            }} />
                            <div className='login__error' hidden={hideRegNameError}>Поле не может быть пустым</div>
                            <Input placeholder='Email' type='text' value={regEmail} onChange={e => {
-                              setRegEmailError(EMAIL_REGEXP.test(e.target.value))
+                              if (EMAIL_REGEXP.test(e.target.value)) setRegEmailError(true)
                               setRegEmail(e.target.value)
                            }} />
                            <div className='login__error' hidden={hideRegEmailError}>Проверьте правильность введенных данных</div>
@@ -119,10 +129,19 @@ const Login = () => {
                            <span>Или</span>
                         </div>
                         <div className="login__inputs">
-                           <Input placeholder='Email' type='text' value={accountEmail} onChange={e => setAccountEmail(e.target.value)} />
-                           <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={accountPassword} onChange={e => setAccountPassword(e.target.value)} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+                           <Input placeholder='Email' type='text' value={accountEmail} onChange={e => {
+                              if (EMAIL_REGEXP.test(e.target.value)) setLoginEmailError(true)
+                              setAccountEmail(e.target.value)
+                           }} />
+                           <div className='login__error' hidden={hideLoginEmailError}>Проверьте правильность введенных данных</div>
+                           <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={accountPassword} onChange={e => {
+                              setLoginPasswordError(e.target.value.length > 5)
+                              setAccountPassword(e.target.value)
+                           }} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+                           <div className='login__error' hidden={hideLoginPasswordError}>Минимум 6 символов</div>
                         </div>
                         <Button onClick={loginWithEmailAndPassowrd} text='Войти' />
+                        <div className='login__error login__error--mt' hidden={hideGlobalLoginError}>Ошибка. Проверьте данные и повторите попытку</div>
                         <div className='login__account login__account--margin-top'>
                            <button onClick={() => setScreen('registration')}>
                               <span>Регистрация</span>   
