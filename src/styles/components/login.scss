@@ -10,6 +10,8 @@
    height: 100%;
    max-width: 794px;
    margin: 0 auto;
+
+
    &__container {
       width: 100%;
       border: 6px solid $primary-color;
@@ -108,6 +110,7 @@
 
 @media (max-width: 768px) {
    .login {
+      align-items: flex-start;
       .logo img {
          display: none;
       }

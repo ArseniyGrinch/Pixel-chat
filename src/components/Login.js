@@ -87,7 +87,7 @@ const Login = () => {
    }
 
    return (
-      <div className='chat-container'>
+      <div className='chat-container chat-container--login'>
          <div className="login">
             <div className="login__container">
                <div className="login__inner">

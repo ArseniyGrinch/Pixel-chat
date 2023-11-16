@@ -4,7 +4,6 @@
 .main-container {
    display: flex;
    flex-direction: column;
-   height: 100vh;
 }
 
 .chat-container {
@@ -15,10 +14,18 @@
    background-image: url('../images/background.jpg');
    background-size: cover;
    background-repeat: no-repeat;
+   &--login {
+      height: 100vh;
+      min-height: calc(775px + 100px);
+   }
 }
 
 @media (max-width: 768px)  {
    .chat-container {
       padding: 24px 16px;
+      &--login {
+         height: 100vh;
+         min-height: calc(706px + 24px);
+      }
    }
 }
