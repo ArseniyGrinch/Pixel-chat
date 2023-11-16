@@ -92,11 +92,15 @@ const Chat = () => {
         <div className="chat__list">
           <div className="chat__list-inner">
             <div className="chat__list-title">Участники чата</div>
-            <div className="chat__list-content">
-              {chatUsers.map((chatUser, index) => {
+            {chatUsers.filter(e => e.uid == user.uid).length ? (
+              <div className="chat__list-content">
+                {chatUsers.map((chatUser, index) => {
                 return <User key={`user-${index}`} user={chatUser} />
               })}
-            </div>
+              </div>
+            ) : (
+              <div className="chat__list-info">Напишите сообщение, чтобы попасть в список участников</div>
+            )}
             <SignOut text='Покинуть чат' icon={exitArrowIcon} />
           </div>
         </div>
