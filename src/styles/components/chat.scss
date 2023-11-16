@@ -1,5 +1,5 @@
 @import '../colors';
-@import '../bg-element';
+@import '../mixins';
 
 .chat {
    display: flex;
@@ -46,6 +46,8 @@
       overflow-x: hidden;
       width: 100%;
       padding: 32px 43px;
+
+      @include scroll-bar
    }
    &__nav {
       display: flex;
@@ -131,6 +133,8 @@
       overflow: auto;
       height: 100%;
       padding: 32px;
+      
+      @include scroll-bar
    }
    &__list-info {
       display: flex;
