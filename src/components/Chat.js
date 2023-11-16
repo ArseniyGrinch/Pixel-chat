@@ -34,22 +34,27 @@ const Chat = () => {
   )
 
   const sendMessage = async () => {
-    let dataToSend = {
-      uid: user.uid,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      text: value,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    if (value) {
+      let dataToSend = {
+        uid: user.uid,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        text: value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, 
+        scrollHeight = scrollRef.current.scrollHeight,
+        userScrollPosition = scrollRef.current.scrollTop + scrollRef.current.clientHeight,
+        lastElementHeight = scrollRef.current.children[scrollRef.current.children.length - 1].offsetHeight
+      firestore.collection('messages').add(dataToSend)
+      .then(() => {
+        if (scrollHeight - userScrollPosition < lastElementHeight) scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+      })
+      firestore.collection('users').doc(`user-${user.uid}`).get().then((doc) => {
+        if (!doc.exists) firestore.collection('users').doc(`user-${user.uid}`).set(dataToSend);
+      })
+  
+      setValue('')
     }
-    firestore.collection('messages').add(dataToSend)
-    .then(() => {
-      /* scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' }) */
-    })
-    firestore.collection('users').doc(`user-${user.uid}`).get().then((doc) => {
-      if (!doc.exists) firestore.collection('users').doc(`user-${user.uid}`).set(dataToSend);
-    })
-
-    setValue('')
   }
 
   useEffect(() => {
