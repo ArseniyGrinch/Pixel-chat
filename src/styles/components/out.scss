@@ -1,0 +1,17 @@
+@import '../colors';
+
+.sign-out {
+   display: flex;
+   justify-content: center;
+   padding: 32px;
+   button {
+      display: flex;
+      align-items: center;
+   }
+   span {
+      font-size: 16px;
+      color: $secondary-color;
+      
+      margin-right: 12px;
+   }
+}

@@ -132,21 +132,6 @@
       height: 100%;
       padding: 32px;
    }
-   &__out {
-      display: flex;
-      justify-content: center;
-      padding: 32px;
-      button {
-         display: flex;
-         align-items: center;
-      }
-      span {
-         font-size: 16px;
-         color: $secondary-color;
-         
-         margin-right: 12px;
-      }
-   }
    &__empty {
       display: flex;
       justify-content: center;

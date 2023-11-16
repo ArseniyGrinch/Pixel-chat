@@ -12,6 +12,7 @@ import Loader from "./Loader";
 import Message from "./Message";
 import Button from './Button';
 import User from './User';
+import SignOut from './SignOut';
 // icons
 import sendBtnIcon from '../../src/images/send-btn.svg';
 import exitArrowIcon from '../../src/images/exit-arrow.svg';
@@ -58,10 +59,6 @@ const Chat = () => {
     }
   });
 
-  const signOut = () => {
-    auth.signOut()
-  }
-
   if (loading) {
     return <Loader />
   }
@@ -100,12 +97,7 @@ const Chat = () => {
                 return <User key={`user-${index}`} user={chatUser} />
               })}
             </div>
-            <div className="chat__out">
-              <button onClick={signOut}>
-                <span>Покинуть чат</span>
-                <img src={exitArrowIcon} />
-              </button>
-            </div>
+            <SignOut text='Покинуть чат' icon={exitArrowIcon} />
           </div>
         </div>
       </div>
