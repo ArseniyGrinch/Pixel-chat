@@ -7,7 +7,7 @@ function User(props) {
   return (
     <div className='user'>
       <div className='user__avatar'>
-        <img src={props.user.photoURL ? props.user.photoURL : avatar} />
+        <img src={props.user.photoURL ? props.user.photoURL : avatar} alt='#' />
       </div>
       <div className='user__name'>{props.user.displayName}</div>
     </div>

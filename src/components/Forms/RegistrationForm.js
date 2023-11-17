@@ -73,10 +73,10 @@ const RegistrationForm = (props) => {
                setRegEmail(e.target.value)
             }} />
             <div className='form__error' hidden={hideRegEmailError}>Проверьте правильность введенных данных</div>
-            <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={regPassword} onChange={e => {
+            <Input placeholder='Пароль' type={passwordIcon ===  showPasswordIcon ? 'text' : 'password'} value={regPassword} onChange={e => {
                setRegPasswordError(e.target.value.length > 5)
                setRegPassword(e.target.value)
-            }} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+            }} onClick={() => setPasswordIcon(passwordIcon === showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
             <div className='form__error' hidden={hideRegPasswordError}>Минимум 6 символов</div>
          </div>
          <Button onClick={registration} text='Зарегистрироваться' />
@@ -84,7 +84,7 @@ const RegistrationForm = (props) => {
          <div className='form__account form__account--border-bottom'>
             <button onClick={props.onClick}>
                <span>У меня есть аккаунт</span>   
-               <img src={smileIcon} />
+               <img src={smileIcon} alt='#' />
             </button>
          </div>
          <Button onClick={loginWithGoogle} text='Войти через Google' icon={googleIcon} />

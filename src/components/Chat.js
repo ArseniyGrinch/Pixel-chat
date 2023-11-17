@@ -62,7 +62,7 @@ const Chat = () => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
       setFirstScroll(true)
     }
-  });
+  }, [loading, firstScroll]);
 
   if (loading) {
     return <Loader />
@@ -97,7 +97,7 @@ const Chat = () => {
         <div className="chat__list">
           <div className="chat__list-inner">
             <div className="chat__list-title">Участники чата</div>
-            {chatUsers.filter(e => e.uid == user.uid).length ? (
+            {chatUsers.filter(e => e.uid === user.uid).length ? (
               <div className="chat__list-content">
                 {chatUsers.map((chatUser, index) => {
                 return <User key={`user-${index}`} user={chatUser} />

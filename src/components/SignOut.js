@@ -18,7 +18,7 @@ const SignOut = (props) => {
                <span>{props.text}</span>
             )}
             {props.icon && (
-               <img src={props.icon} />
+               <img src={props.icon} alt='#' />
             )}
          </button>
       </div>

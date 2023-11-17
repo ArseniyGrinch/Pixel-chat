@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { Context } from '../../index';
 // firebase
 import firebase from 'firebase/compat/app';
-import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 // components
 import Input from '../Input';
 import Button from '../Button';
@@ -38,8 +38,7 @@ const LoginForm = (props) => {
          setLoginEmailError(false)
       } else if (accountPassword.length < 6) {
          setLoginPasswordError(false)
-      } else {
-         const authData = getAuth()
+      } else { 
          signInWithEmailAndPassword(auth, accountEmail, accountPassword)
          .then(() => {
             setGlobalLoginError(true)
@@ -62,10 +61,10 @@ const LoginForm = (props) => {
                setAccountEmail(e.target.value)
             }} />
             <div className='form__error' hidden={hideLoginEmailError}>Проверьте правильность введенных данных</div>
-            <Input placeholder='Пароль' type={passwordIcon ==  showPasswordIcon ? 'text' : 'password'} value={accountPassword} onChange={e => {
+            <Input placeholder='Пароль' type={passwordIcon ===  showPasswordIcon ? 'text' : 'password'} value={accountPassword} onChange={e => {
                setLoginPasswordError(e.target.value.length > 5)
                setAccountPassword(e.target.value)
-            }} onClick={() => setPasswordIcon(passwordIcon == showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
+            }} onClick={() => setPasswordIcon(passwordIcon === showPasswordIcon ? hidePasswordIcon : showPasswordIcon)} icon={passwordIcon} />
             <div className='form__error' hidden={hideLoginPasswordError}>Минимум 6 символов</div>
          </div>
          <Button onClick={loginWithEmailAndPassowrd} text='Войти' />

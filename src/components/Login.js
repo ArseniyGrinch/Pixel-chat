@@ -16,7 +16,7 @@ const Login = () => {
             <div className="login__container">
                <div className="login__inner">
                   <Logo color='#fff' />
-                  {screen == 'registration' ? (
+                  {screen === 'registration' ? (
                      <RegistrationForm onClick={() => setScreen('account')} />
                   ) : (
                      <LoginForm onClick={() => setScreen('registration')} />
