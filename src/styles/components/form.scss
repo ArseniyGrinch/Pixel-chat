@@ -27,7 +27,7 @@
    }
    &__error {
       font-size: 12px;
-      color: #F81C2F;
+      color: $error-color;
       margin-bottom: 8px;
       &--mt {
          margin-top: 8px;
