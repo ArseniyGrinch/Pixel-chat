@@ -5,7 +5,7 @@ import { Context } from '../index';
 import '../styles/components/out.scss';
 
 const SignOut = (props) => {
-   const {auth, firestore} = useContext(Context)
+   const {auth} = useContext(Context)
 
    const signOut = () => {
       auth.signOut()
