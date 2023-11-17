@@ -10,8 +10,6 @@
    height: 100%;
    max-width: 794px;
    margin: 0 auto;
-
-
    &__container {
       width: 100%;
       border: 6px solid $primary-color;
@@ -40,70 +38,6 @@
       }
       &::before {
          @include bg-element($right: -6px, $bottom: -6px)
-      }
-   }
-   &__form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      width: 100%;
-      margin-top: 44px;
-      h2 {
-         font-size: 16px;
-         color: $white;
-      }
-   }
-   &__inputs {
-      display: flex;
-      flex-direction: column;
-
-      width: 100%;
-      margin-top: 24px;
-      margin-bottom: 28px;
-      .main-input {
-         margin-bottom: 12px;
-         &:last-child {
-            margin-bottom: 0;
-         }
-      }
-   }
-   &__account {
-      display: flex;
-      justify-content: center;
-
-      width: 100%;
-      button {
-         display: flex;
-         align-items: center;
-      }
-      span {
-         font-size: 12px;
-         color: #D4D1D8;
-         margin-right: 12px;
-      }
-      &--border-bottom {
-         border-bottom: 4px solid #D4D1D8;
-         margin-top: 30px;
-         margin-bottom: 16px;
-         padding-bottom: 40px;
-      }
-      &--border-top {
-         border-top: 4px solid #D4D1D8;
-         margin-top: 16px;
-         margin-top: 16px;
-         padding-top: 40px;
-      }
-      &--margin-top {
-         margin-top: 30px;
-      }
-   }
-   &__error {
-      font-size: 12px;
-      color: #F81C2F;
-      margin-bottom: 8px;
-      &--mt {
-         margin-top: 8px;
       }
    }
 }
