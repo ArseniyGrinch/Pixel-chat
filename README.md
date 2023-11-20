@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+# Pixel Chat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://raw.githubusercontent.com/ArseniyGrinch/chat/main/screenshots/screenshot1.jpg" />
 
-## Available Scripts
+# Описание
 
-In the project directory, you can run:
+Цель проекта - создание pet-проекта
 
-### `npm start`
+Что реализовано: 
+- Окно входа - регистрация через email и пароль, вход через Google   
+- Окно чата - возможность писать сообщения, список участников чата, выход из аккаунта
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Технологии 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- Firebase
+- [NES css](https://nostalgic-css.github.io/NES.css/) / scss
 
-### `npm test`
+# Запуск
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. npm install
+2. Переименовываем example.env в .env, открываем файл
+3. Создаем проект в Firebase, переносим firebaseConfig в .env
+4. Разрешаем следующие настройки для входа: 
 
-### `npm run build`
+<img src="https://raw.githubusercontent.com/ArseniyGrinch/chat/main/screenshots/screenshot2.jpg" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. Создаем Firestore Database с настройками "in test mode"
+6. npm start
