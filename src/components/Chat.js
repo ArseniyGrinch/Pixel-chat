@@ -59,20 +59,20 @@ const Chat = () => {
   }
 
   useEffect(() => {
-    if (!loading && !firstScroll) {
+    if (scrollRef.current && !loading && !firstScroll) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
       setFirstScroll(true)
     }
   }, [loading, firstScroll]);
 
   useEffect(() => {
-    if (messages) {
+    if (scrollRef.current && scrollRef.current.children.length > 2 && messages) {
       let scrollHeight = scrollRef.current.scrollHeight,
         userScrollPosition = scrollRef.current.scrollTop + scrollRef.current.clientHeight,
         lastElementHeight = scrollRef.current.children[scrollRef.current.children.length - 1].offsetHeight,
         secondLastElementStyle = scrollRef.current.children[scrollRef.current.children.length - 2].currentStyle || window.getComputedStyle(scrollRef.current.children[scrollRef.current.children.length - 2])
 
-      if (scrollHeight - userScrollPosition - lastElementHeight - parseInt(secondLastElementStyle.marginBottom) < 1) scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+      if (secondLastElementStyle && scrollHeight - userScrollPosition - lastElementHeight - parseInt(secondLastElementStyle.marginBottom) < 1) scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
     }
   }, [messages]);
 
@@ -87,7 +87,7 @@ const Chat = () => {
           <div className="chat__content-top">
             <div className="chat__messages">
               <div className="chat__messages-inner">
-                {messages.length ? (
+                {messages?.length ? (
                   <div className="chat__messages-container" ref={scrollRef}>
                     {messages.map((message, index) => {
                       return <Message key={`message-${index}`} message={message} user={user} />
@@ -109,7 +109,7 @@ const Chat = () => {
         <div className="chat__list">
           <div className="chat__list-inner">
             <div className="chat__list-title">Участники чата</div>
-            {chatUsers.filter(e => e.uid === user.uid).length ? (
+            {chatUsers?.filter(e => e.uid === user.uid).length ? (
               <div className="chat__list-content">
                 {chatUsers.map((chatUser, index) => {
                 return <User key={`user-${index}`} user={chatUser} />
