@@ -41,14 +41,8 @@ const Chat = () => {
         photoURL: user.photoURL,
         text: value,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, 
-        scrollHeight = scrollRef.current.scrollHeight,
-        userScrollPosition = scrollRef.current.scrollTop + scrollRef.current.clientHeight,
-        lastElementHeight = scrollRef.current.children[scrollRef.current.children.length - 1].offsetHeight
+      }
       firestore.collection('messages').add(dataToSend)
-      .then(() => {
-        if (scrollHeight - userScrollPosition < lastElementHeight) scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
-      })
       firestore.collection('users').doc(`user-${user.uid}`).get().then((doc) => {
         if (!doc.exists) firestore.collection('users').doc(`user-${user.uid}`).set(dataToSend);
       })
@@ -63,6 +57,17 @@ const Chat = () => {
       setFirstScroll(true)
     }
   }, [loading, firstScroll]);
+
+  useEffect(() => {
+    if (messages) {
+      let scrollHeight = scrollRef.current.scrollHeight,
+        userScrollPosition = scrollRef.current.scrollTop + scrollRef.current.clientHeight,
+        lastElementHeight = scrollRef.current.children[scrollRef.current.children.length - 1].offsetHeight,
+        secondLastElementStyle = scrollRef.current.children[scrollRef.current.children.length - 2].currentStyle || window.getComputedStyle(scrollRef.current.children[scrollRef.current.children.length - 2])
+
+      if (scrollHeight - userScrollPosition - lastElementHeight - parseInt(secondLastElementStyle.marginBottom) < 1) scrollRef.current.scroll({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+    }
+  }, [messages]);
 
   if (loading) {
     return <Loader />
