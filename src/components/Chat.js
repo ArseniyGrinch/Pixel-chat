@@ -33,7 +33,7 @@ const Chat = () => {
     firestore.collection('messages').orderBy('createdAt')
   )
 
-  const sendMessage = async () => {
+  const sendMessage = () => {
     if (value) {
       let dataToSend = {
         uid: user.uid,
@@ -48,6 +48,13 @@ const Chat = () => {
       })
   
       setValue('')
+    }
+  }
+
+  const keypress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault()
+      sendMessage()
     }
   }
 
@@ -94,7 +101,7 @@ const Chat = () => {
           </div>
           <div className="chat__nav">
             <div className="chat__nav-inner">
-              <textarea placeholder="Твоё сообщение..." value={value} onChange={e => setValue(e.target.value)} />
+              <textarea placeholder="Твоё сообщение..." value={value} onChange={e => setValue(e.target.value)} onKeyPress={key => keypress(key)} />
               <Button onClick={sendMessage} icon={sendBtnIcon} />
             </div>
           </div>
